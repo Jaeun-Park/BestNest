@@ -106,11 +106,23 @@ if st.button("Analyze"):
         # Create User_Choices.csv dynamically
         with tempfile.TemporaryDirectory() as temp_dir:
             user_choices_path = os.path.join(temp_dir, 'User_Choices.csv')
-            pd.DataFrame(user_choices, columns=['0']).to_csv(user_choices_path, index=False)
             
-            # Log temporary directory and file path
+            # Logging the paths for debugging
             st.write(f"Temporary directory path: {temp_dir}")
             st.write(f"User choices file path: {user_choices_path}")
+            
+            # Try creating the CSV file and log confirmation
+            try:
+                pd.DataFrame(user_choices, columns=['0']).to_csv(user_choices_path, index=False)
+                st.write(f"CSV file created at: {user_choices_path}")
+            except Exception as e:
+                st.error(f"Failed to create User_Choices.csv: {e}")
+                st.stop()
+
+            # Verify if the CSV file was created successfully
+            if not os.path.exists(user_choices_path):
+                st.error(f"CSV file not found at: {user_choices_path}")
+                st.stop()
 
             # Merge data based on user input
             try:
