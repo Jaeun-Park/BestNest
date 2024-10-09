@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
 import os
+import tempfile
 from Merge_dataset import MergeData
 
 # Clear the cache
@@ -103,51 +104,56 @@ if st.button("Analyze"):
     if not user_choices:
         st.error("Please select at least one parameter.")
     else:
-        # First, merge data based on user input
-        try:
-            file_path = MergeData.mergeData()  # Capture the file path from mergeData()
-        except Exception as e:
-            st.error(f"Data merging failed: {str(e)}")
-            st.stop()
+        # Create User_Choices.csv dynamically
+        with tempfile.TemporaryDirectory() as temp_dir:
+            user_choices_path = os.path.join(temp_dir, 'User_Choices.csv')
+            pd.DataFrame(user_choices, columns=['0']).to_csv(user_choices_path, index=False)
 
-        # Step 2: Read the merged CSV file
-        try:
-            df_merged = pd.read_csv(file_path)
-        except FileNotFoundError:
-            st.error(f"CSV file not found at: {file_path}.")
-            st.stop()
+            # Merge data based on user input
+            try:
+                file_path = MergeData.mergeData(user_choices_path)  # Pass user choices file path to mergeData
+            except Exception as e:
+                st.error(f"Data merging failed: {str(e)}")
+                st.stop()
 
-        # Step 3: Filter the DataFrame based on user choices
-        try:
-            final_df = filter_dataframe(df_merged, user_choices)
-        except ValueError as e:
-            st.error(str(e))
-            st.stop()
+            # Step 2: Read the merged CSV file
+            try:
+                df_merged = pd.read_csv(file_path)
+            except FileNotFoundError:
+                st.error(f"CSV file not found at: {file_path}.")
+                st.stop()
 
-        # Generate summary for the top city
-        top_city_name, top_city_summary = generate_top_city_summary(final_df)
+            # Step 3: Filter the DataFrame based on user choices
+            try:
+                final_df = filter_dataframe(df_merged, user_choices)
+            except ValueError as e:
+                st.error(str(e))
+                st.stop()
 
-        # Step 4: Display components individually
+            # Generate summary for the top city
+            top_city_name, top_city_summary = generate_top_city_summary(final_df)
 
-        # Display top city summary
-        st.subheader(f"Your Best Nest City: {top_city_name}")
-        st.text(top_city_summary)
+            # Step 4: Display components individually
 
-        # Display top 10 cities in a table (Rank, City, Total Score only)
-        st.subheader("Top 10 Cities based on selected parameters")
-        total_sum_score = 10 * len(user_choices)
+            # Display top city summary
+            st.subheader(f"Your Best Nest City: {top_city_name}")
+            st.text(top_city_summary)
 
-        # Select the relevant columns and rename the "Total Score" column
-        top_10_table = final_df[['Rank', 'City', 'Total Score']].head(10)
-        top_10_table = top_10_table.rename(columns={'Total Score': f'Overall Score (Out of Total {total_sum_score})'})
+            # Display top 10 cities in a table (Rank, City, Total Score only)
+            st.subheader("Top 10 Cities based on selected parameters")
+            total_sum_score = 10 * len(user_choices)
 
-        # Convert the "Overall Score" column to integer
-        top_10_table[f'Overall Score (Out of Total {total_sum_score})'] = top_10_table[f'Overall Score (Out of Total {total_sum_score})'].astype(int)
+            # Select the relevant columns and rename the "Total Score" column
+            top_10_table = final_df[['Rank', 'City', 'Total Score']].head(10)
+            top_10_table = top_10_table.rename(columns={'Total Score': f'Overall Score (Out of Total {total_sum_score})'})
 
-        # Hide the index column by resetting the index and passing it to st.dataframe
-        st.dataframe(top_10_table.reset_index(drop=True), hide_index=True)
+            # Convert the "Overall Score" column to integer
+            top_10_table[f'Overall Score (Out of Total {total_sum_score})'] = top_10_table[f'Overall Score (Out of Total {total_sum_score})'].astype(int)
 
-        # Display heatmap separately
-        st.subheader("Heatmap for your Top 10 Cities")
-        score_columns = [col for col in final_df.columns if 'Score' in col and col != 'Total Score']
-        heatmap_chart(final_df.head(10), score_columns)
+            # Hide the index column by resetting the index and passing it to st.dataframe
+            st.dataframe(top_10_table.reset_index(drop=True), hide_index=True)
+
+            # Display heatmap separately
+            st.subheader("Heatmap for your Top 10 Cities")
+            score_columns = [col for col in final_df.columns if 'Score' in col and col != 'Total Score']
+            heatmap_chart(final_df.head(10), score_columns)
