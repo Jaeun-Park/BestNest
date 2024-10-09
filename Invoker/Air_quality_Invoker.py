@@ -4,6 +4,7 @@ import requests
 import pandas as pd
 import numpy as np
 import zipfile
+import tempfile
 
 # Add the Scraper folder path to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../Scraper')))
@@ -15,8 +16,7 @@ class AirQualityInvoker:
     def __init__(self) -> None:
         pass
 
-    def airQualityInvoker(self):
-        #print("Step 1: Initializing AirQualityScraper and getting parsed HTML content")
+    def airQualityInvoker(self, temp_dir):
         # Step 1: Initialize AirQualityScraper and get the parsed HTML content
         scraper = AirQualityScraper()
         soup = scraper.airQualityScraper()
@@ -25,7 +25,6 @@ class AirQualityInvoker:
             print("Failed to get HTML content from the scraper.")
             return
 
-        #print("Step 2: Finding <h2> with id='Annual'")
         # Step 2: Find the <h2> with id="Annual"
         results_h2 = soup.find('h2', id="Annual")
 
@@ -33,7 +32,6 @@ class AirQualityInvoker:
             print("Failed to find the Annual section.")
             return
 
-        #print("Step 3: Finding the next table with class='tablebord zebra'")
         # Step 3: Find the next table with the class "tablebord zebra"
         annual_table = results_h2.find_next('table', class_='tablebord zebra')
 
@@ -41,7 +39,6 @@ class AirQualityInvoker:
             print("Failed to find the annual table.")
             return
 
-        #print("Step 4: Searching for the download link containing the specific text")
         # Step 4: Search for the download link containing the specific text
         download_link = None
         for a_tag in annual_table.find_all('a'):
@@ -51,45 +48,38 @@ class AirQualityInvoker:
 
         # Step 5: Check if the download link was found
         if download_link:
-            #print("Download link found:", download_link)
             # Form the complete URL for downloading the file
             base_url = "https://aqs.epa.gov/aqsweb/airdata/"
             file_url = f"{base_url}{download_link}"
 
-            #print("Step 6: Downloading the ZIP file")
             # Step 6: Download the ZIP file
             zip_response = requests.get(file_url)
-            zip_filename = "annual_aqi_by_cbsa_2024.zip"
+            zip_filename = os.path.join(temp_dir, "annual_aqi_by_cbsa_2024.zip")
 
-            # Step 7: Save the ZIP file locally
+            # Step 7: Save the ZIP file in the temporary directory
             with open(zip_filename, 'wb') as file:
                 file.write(zip_response.content)
 
-            #print(f"Downloaded ZIP file: {zip_filename}")
-
-            # Step 8: Extract the CSV file from the ZIP
+            # Step 8: Extract the CSV file from the ZIP into the temp directory
             try:
                 with zipfile.ZipFile(zip_filename, 'r') as zip_ref:
-                    zip_ref.extractall()
-                #print("Extracted the CSV files to the current directory")
+                    zip_ref.extractall(temp_dir)
             except Exception as e:
                 print("Failed to extract ZIP file:", e)
                 return
 
-            # Step 9: Clean up by removing the ZIP file
+            # Step 9: Remove the ZIP file after extraction
             os.remove(zip_filename)
-            #print("Cleaned up the ZIP file")
 
-            # Step 10: Read in the dataset
+            # Step 10: Read in the dataset from the temp directory
+            csv_file_path = os.path.join(temp_dir, 'annual_aqi_by_cbsa_2024.csv')
             try:
-                df_air_quality = pd.read_csv('annual_aqi_by_cbsa_2024.csv')
-                #print("Successfully read the CSV file")
+                df_air_quality = pd.read_csv(csv_file_path)
             except FileNotFoundError:
                 print("CSV file not found. Please check if the ZIP was extracted correctly.")
                 return
 
             # Step 11-18: Processing the DataFrame
-            #print("Processing the data")
             df_cbsa_good_days = df_air_quality.loc[:, ["CBSA", "Days with AQI", "Good Days"]].copy()
             df_cbsa_good_days["City"] = df_cbsa_good_days["CBSA"].str.split(',').str[0]
             df_cbsa_good_days["percentage"] = (df_cbsa_good_days["Good Days"] / df_cbsa_good_days["Days with AQI"]) * 100
@@ -112,16 +102,14 @@ class AirQualityInvoker:
             df_cbsa_good_days = df_cbsa_good_days.loc[df_cbsa_good_days.groupby("City")["score"].idxmax()]
             df_cbsa_good_days = df_cbsa_good_days.sort_values(by="score", ascending=False)
 
-            # Step 19-20: Saving the result to CSV
-            output_dir = os.path.join(os.path.dirname(__file__), '../Data_Files')
-            os.makedirs(output_dir, exist_ok=True)
-            file_path = os.path.join(output_dir, 'Air_quality.csv')
+            # Step 19-20: Save the result in the temporary directory
+            file_path = os.path.join(temp_dir, 'Air_quality.csv')
             df_cbsa_good_days.to_csv(file_path, index=False)
-            #print(f"Sorted data has been saved to '{file_path}'")
 
         else:
             print("Download link for 'annual_aqi_by_cbsa_2024.zip' not found.")
 
 if __name__ == "__main__":
-    invoker = AirQualityInvoker()
-    invoker.airQualityInvoker()
+    with tempfile.TemporaryDirectory() as temp_dir:
+        invoker = AirQualityInvoker()
+        invoker.airQualityInvoker(temp_dir)

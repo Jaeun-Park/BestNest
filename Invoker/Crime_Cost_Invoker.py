@@ -1,17 +1,21 @@
 import sys
 import os
+import pandas as pd
+import numpy as np
+import tempfile
+
 sys.path.append(os.path.join(os.path.dirname(__file__), '../Scraper'))
 
 from Crime_cost_scraper import CrimeCostScraper
-import pandas as pd
-import numpy as np
 
-class CrimeCostInvoker :
+class CrimeCostInvoker:
     def __init__(self) -> None:
         pass
-    def crimeCostInvoker(self):
-        cr = CrimeCostScraper
-        response = cr.crimeCostScraper(self)
+
+    def crimeCostInvoker(self, temp_dir):
+        cr = CrimeCostScraper()
+        response = cr.crimeCostScraper()
+
         # Find the <div> containing the information
         results_div = response.find('div', id="mg-odata-google-sheet-213")
 
@@ -37,13 +41,12 @@ class CrimeCostInvoker :
         # Extract specific columns (City and Crime Cost per Capita)
         df_city_crime_cost = df_crime_cost[["City", "Crime Cost per Capita"]]
 
-        # Save the DataFrame to a CSV file in the local directory
-        df_crime_cost.to_csv('crime_cost_per_capita_by_city_2022.csv', index=False)
-
-        #print("Data has been saved to 'safecrime_cost_per_capita_by_city_2022.csv'")
+        # Save the DataFrame to a CSV file in the temporary directory
+        temp_csv_path = os.path.join(temp_dir, 'crime_cost_per_capita_by_city_2022.csv')
+        df_city_crime_cost.to_csv(temp_csv_path, index=False)
 
         # Read in the dataset from the CSV file
-        df_crime_cost = pd.read_csv('crime_cost_per_capita_by_city_2022.csv')
+        df_crime_cost = pd.read_csv(temp_csv_path)
 
         # Create a proper copy of the subset of the DataFrame for calculations
         df_crime_copy = df_crime_cost.loc[:, ["City", "Crime Cost per Capita"]].copy()
@@ -72,15 +75,13 @@ class CrimeCostInvoker :
         # Sort the DataFrame by "score" in descending order
         df_crime_copy = df_crime_copy.sort_values(by="score", ascending=False)
 
-        # data cleasning
-        #print(df_crime_copy)
+        # Data cleansing
         df_crime_copy['State'] = df_crime_copy['City'].str.split(',').str[1]
         df_crime_copy['City'] = df_crime_copy['City'].str.split(',').str[0]
-        
-        # Specify the output directory
-        output_dir = os.path.join(os.path.dirname(__file__), '../Data_Files')
-        os.makedirs(output_dir, exist_ok=True)  # Create directory if it doesn't exist
 
-        # Define the file path for the CSV
-        file_path = os.path.join(output_dir, 'Crime_Rate.csv')
-        df_crime_copy.to_csv(file_path, index=False)  # Write to CSV
+        # Save the result CSV in the temporary directory
+        final_csv_path = os.path.join(temp_dir, 'Crime_Rate.csv')
+        df_crime_copy.to_csv(final_csv_path, index=False)
+
+        # Return the path to the generated CSV
+        return final_csv_path
