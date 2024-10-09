@@ -1,6 +1,7 @@
 pandas
 numpy
 matplotlib
+pillow
 seaborn
 streamlit
 requests
