@@ -10,31 +10,30 @@ import os
 
 class MergeData():
     @staticmethod
-    def mergeData():
+    def mergeData(user_choices_path):
         expected_columns = ['City_x', 'State_x', 'Cost of Living Index', 'ID', 'Score', 'City-State', 'City_y', 
-                            'Crime Cost per Capita', 'score_x', 'State_y', 'CBSA', 'Days with AQI', 'Good Days', 
+                            'Crime Cost per Capita', 'score_x', 'State_y', 'CBSA', 'Days with AQI', 'Good Days',         
                             'City', 'score_y', 'State', 'Literacy Rate Value', 'Literacy Rate Score']
 
         # Use a temporary directory to handle file operations
         with tempfile.TemporaryDirectory() as temp_dir:
             # Path where temporary files will be saved
             data_files_path = temp_dir
-
-            # Reading user choices
-            choices_path = os.path.join(data_files_path, 'User_Choices.csv')  # Make sure to save 'User_Choices.csv' here
-            choices = pd.read_csv(choices_path)
+            
+            # Reading user choices from the passed file path
+            choices = pd.read_csv(user_choices_path)
             choices_list = choices['0'].tolist()
-
+            
             print("Loading Data....")
             df_merged = []
-
+            
             for choice in choices_list:
                 if int(choice) == 1:
-                    # Invoke the cost of living data scraper
+                    # Invoke the cost of living data scraper and pass the temp dir
                     col = CostOfLivingInvoker()
-                    col.costOfLivingInvoker(temp_dir)  # Pass temp_dir to the scraper
+                    col.costOfLivingInvoker(data_files_path)
                     
-                    # Read Cost of Living data from a temporary CSV
+                    # Read Cost of Living data from the temporary directory
                     col_path = os.path.join(data_files_path, 'Cost_of_Living.csv')
                     df_col = pd.read_csv(col_path)
                     
@@ -44,11 +43,11 @@ class MergeData():
                     df_merged.append(df_col)
                 
                 elif int(choice) == 2:
-                    # Invoke the literacy rate data scraper
+                    # Invoke the literacy rate data scraper and pass the temp dir
                     lr = LiteracyRateInvoker()
-                    lr.literacyRateInvoker(temp_dir)  # Pass temp_dir to the scraper
+                    lr.literacyRateInvoker(data_files_path)
                     
-                    # Read Literacy Rate data from a temporary CSV
+                    # Read Literacy Rate data from the temporary directory
                     lr_path = os.path.join(data_files_path, 'Literacy_Rate.csv')
                     df_lr = pd.read_csv(lr_path)
                     
@@ -59,11 +58,11 @@ class MergeData():
                     df_merged.append(df_lr)
                 
                 elif int(choice) == 3:
-                    # Invoke the crime cost data scraper
+                    # Invoke the crime cost data scraper and pass the temp dir
                     cr = CrimeCostInvoker()
-                    cr.crimeCostInvoker(temp_dir)  # Pass temp_dir to the scraper
+                    cr.crimeCostInvoker(data_files_path)
                     
-                    # Read Crime Cost data from a temporary CSV
+                    # Read Crime Cost data from the temporary directory
                     cr_path = os.path.join(data_files_path, 'Crime_Rate.csv')
                     df_cr = pd.read_csv(cr_path)
                     
@@ -73,11 +72,11 @@ class MergeData():
                     df_merged.append(df_cr)
                 
                 elif int(choice) == 4:
-                    # Invoke the air quality data scraper
+                    # Invoke the air quality data scraper and pass the temp dir
                     aqi = AirQualityInvoker()
-                    aqi.airQualityInvoker(temp_dir)  # Pass temp_dir to the scraper
+                    aqi.airQualityInvoker(data_files_path)
                     
-                    # Read Air Quality data from a temporary CSV
+                    # Read Air Quality data from the temporary directory
                     aqi_path = os.path.join(data_files_path, 'Air_quality.csv')
                     df_aqi = pd.read_csv(aqi_path)
                     

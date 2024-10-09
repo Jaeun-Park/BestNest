@@ -80,7 +80,6 @@ def heatmap_chart(df, score_columns):
     ax.set_ylabel('')  # Hide the 'City' label on the y-axis
     st.pyplot(fig)
 
-
 # Streamlit Interface
 st.title("Best Nest")
 st.write('Our product helps you find the perfect city to live in, tailored just for you!\n'
