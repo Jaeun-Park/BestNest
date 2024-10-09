@@ -27,6 +27,8 @@ class MergeData():
             print("Loading Data....")
             df_merged = []
             
+            print(f"User choices file path: {user_choices_path}")
+            
             for choice in choices_list:
                 if int(choice) == 1:
                     # Invoke the cost of living data scraper and pass the temp dir

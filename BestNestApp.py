@@ -107,6 +107,10 @@ if st.button("Analyze"):
         with tempfile.TemporaryDirectory() as temp_dir:
             user_choices_path = os.path.join(temp_dir, 'User_Choices.csv')
             pd.DataFrame(user_choices, columns=['0']).to_csv(user_choices_path, index=False)
+            
+            # Log temporary directory and file path
+            st.write(f"Temporary directory path: {temp_dir}")
+            st.write(f"User choices file path: {user_choices_path}")
 
             # Merge data based on user input
             try:
