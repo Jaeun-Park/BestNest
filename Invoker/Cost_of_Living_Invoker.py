@@ -2,9 +2,7 @@ import sys
 import os
 import pandas as pd
 import numpy as np
-sys.path.append(os.path.join(os.path.dirname(__file__), '../Scraper'))
-
-from Cost_of_Living_scraper import CostOfLivingScraper
+from Scraper.Cost_of_Living_scraper import CostOfLivingScraper
 import pandas as pd
 
 class CostOfLivingInvoker :

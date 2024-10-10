@@ -5,11 +5,7 @@ import pandas as pd
 import numpy as np
 import zipfile
 
-# Add the Scraper folder path to sys.path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../Scraper')))
-
-# Now import AirQualityScraper
-from Air_quality_scraper import AirQualityScraper
+from Scraper.Air_quality_scraper import AirQualityScraper
 
 class AirQualityInvoker:
     def __init__(self) -> None:

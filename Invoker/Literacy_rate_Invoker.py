@@ -1,12 +1,9 @@
 from queue import Full
 import sys
 import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '../Scraper'))
-from Literacy_rate_scraper import LiteracyRateScraper
+
+from Scraper.Literacy_rate_scraper import LiteracyRateScraper
 import pandas as pd
-
-
-
 
 class LiteracyRateInvoker:
     def __init__(self) -> None:

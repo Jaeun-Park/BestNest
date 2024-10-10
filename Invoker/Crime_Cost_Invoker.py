@@ -1,8 +1,6 @@
 import sys
 import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '../Scraper'))
-
-from Crime_cost_scraper import CrimeCostScraper
+from Scraper.Crime_cost_scraper import CrimeCostScraper
 import pandas as pd
 import numpy as np
 
