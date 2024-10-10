@@ -2,7 +2,7 @@ from queue import Full
 import sys
 import os
 
-from Scraper.Literacy_rate_scraper import LiteracyRateScraper
+from ..Scraper.Literacy_rate_scraper import LiteracyRateScraper
 import pandas as pd
 
 class LiteracyRateInvoker:

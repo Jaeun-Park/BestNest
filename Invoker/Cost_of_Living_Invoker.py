@@ -2,7 +2,7 @@ import sys
 import os
 import pandas as pd
 import numpy as np
-from Scraper.Cost_of_Living_scraper import CostOfLivingScraper
+from ..Scraper.Cost_of_Living_scraper import CostOfLivingScraper
 import pandas as pd
 
 class CostOfLivingInvoker :
