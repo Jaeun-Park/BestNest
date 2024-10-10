@@ -74,8 +74,8 @@ def heatmap_chart(df, score_columns):
                 linewidths=0.5)
 
     # Adjust font sizes for axes and colorbar
-    ax.tick_params(axis='x', which='major', labelsize=15)  # x-axis tick label size
-    ax.tick_params(axis='y', which='major', labelsize=25)  # y-axis label size
+    ax.tick_params(axis='x', which='major', labelsize=10)  # x-axis tick label size
+    ax.tick_params(axis='y', which='major', labelsize=20)  # y-axis label size
     cbar = ax.collections[0].colorbar
     cbar.ax.tick_params(labelsize=25)  # Increase colorbar tick label size
     cbar.set_label('Score', size=25)  # Set colorbar label and increase its font size
