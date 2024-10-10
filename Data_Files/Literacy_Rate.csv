@@ -1,0 +1,151 @@
+Overall Rank*,MSA,Total Score,State,ID,Score
+1,Ann Arbor,93.71, MI,1,10
+2,San Jose-Sunnyvale-Santa Clara,82.12, CA,2,10
+3,Washington-Arlington-Alexandria,81.88, DC-VA-MD-WV,3,10
+4,Durham-Chapel Hill,81.32, NC,4,10
+5,Madison,81.03, WI,5,10
+6,San Francisco-Oakland-Berkeley,80.76, CA,6,10
+7,Raleigh-Cary,79.56, NC,7,10
+8,Austin-Round Rock-Georgetown,78.12, TX,8,10
+9,Boston-Cambridge-Newton,78.10, MA-NH,9,10
+10,Seattle-Tacoma-Bellevue,77.60, WA,10,10
+11,Denver-Aurora-Lakewood,73.22, CO,11,10
+12,Provo-Orem,73.13, UT,12,10
+13,Huntsville,71.82, AL,13,10
+14,Portland-Vancouver-Hillsboro,71.59, OR-WA,14,10
+15,Portland-South Portland,71.35, ME,15,10
+16,Colorado Springs,70.18, CO,16,9
+17,Bridgeport-Stamford-Norwalk,70.01, CT,17,9
+18,Minneapolis-St. Paul-Bloomington,69.56, MN-WI,18,9
+19,Trenton-Princeton,69.56, NJ,19,9
+20,Baltimore-Columbia-Towson,68.80, MD,20,9
+21,Albany-Schenectady-Troy,68.74, NY,21,9
+22,Tallahassee,68.26, FL,22,9
+23,San Diego-Chula Vista-Carlsbad,67.98, CA,23,9
+24,Lexington-Fayette,66.77, KY,24,9
+25,Atlanta-Sandy Springs-Alpharetta,66.08, GA,25,9
+26,New York-Newark-Jersey City,65.78, NY-NJ-PA,26,9
+27,Hartford-East Hartford-Middletown,65.56, CT,27,9
+28,Urban Honolulu,63.92, HI,28,9
+29,Chicago-Naperville-Elgin,63.90, IL-IN-WI,29,9
+30,Philadelphia-Camden-Wilmington,63.48, PA-NJ-DE-MD,30,9
+31,Asheville,63.31, NC,31,8
+32,Richmond,62.56, VA,32,8
+33,Pittsburgh,62.54, PA,33,8
+34,Manchester-Nashua,62.46, NH,34,8
+35,Salt Lake City,61.82, UT,35,8
+36,Charleston-North Charleston,61.59, SC,36,8
+37,Eugene-Springfield,61.57, OR,37,8
+38,Omaha-Council Bluffs,61.36, NE-IA,38,8
+39,Kansas City,61.34, MO-KS,39,8
+40,Rochester,61.33, NY,40,8
+41,Virginia Beach-Norfolk-Newport News,61.16, VA-NC,41,8
+42,Lansing-East Lansing,60.73, MI,42,8
+43,Nashville-Davidson--Murfreesboro--Franklin,60.69, TN,43,8
+44,Columbus,60.51, OH,44,8
+45,Charlotte-Concord-Gastonia,60.42, NC-SC,45,8
+46,Tucson,60.28, AZ,46,7
+47,St. Louis,60.19, MO-IL,47,7
+48,New Haven-Milford,60.10, CT,48,7
+49,Sacramento-Roseville-Folsom,59.44, CA,49,7
+50,Boise City,59.38, ID,50,7
+51,Worcester,59.30, MA-CT,51,7
+52,Santa Rosa-Petaluma,58.36, CA,52,7
+53,Naples-Marco Island,58.29, FL,53,7
+54,Des Moines-West Des Moines,57.51, IA,54,7
+55,Milwaukee-Waukesha,57.40, WI,55,7
+56,Orlando-Kissimmee-Sanford,57.31, FL,56,7
+57,Cincinnati,57.06, OH-KY-IN,57,7
+58,Buffalo-Cheektowaga,57.05, NY,58,7
+59,Fayetteville-Springdale-Rogers,56.78, AR,59,7
+60,Albuquerque,56.75, NM,60,7
+61,Columbia,56.70, SC,61,6
+62,Dayton-Kettering,56.36, OH,62,6
+63,North Port-Sarasota-Bradenton,56.33, FL,63,6
+64,Santa Maria-Santa Barbara,56.20, CA,64,6
+65,Palm Bay-Melbourne-Titusville,56.07, FL,65,6
+65,Spokane-Spokane Valley,56.07, WA,66,6
+67,Grand Rapids-Kentwood,56.04, MI,67,6
+68,Anchorage,55.98, AK,68,6
+69,Syracuse,55.37, NY,69,6
+70,Birmingham-Hoover,55.10, AL,70,6
+71,Miami-Fort Lauderdale-Pompano Beach,55.07, FL,71,6
+72,Dallas-Fort Worth-Arlington,54.92, TX,72,6
+73,Indianapolis-Carmel-Anderson,54.76, IN,73,6
+74,Phoenix-Mesa-Chandler,54.56, AZ,74,6
+75,Little Rock-North Little Rock-Conway,54.46, AR,75,6
+76,Jacksonville,54.27, FL,76,5
+77,Reno,54.23, NV,77,5
+78,Springfield,54.07, MA,78,5
+79,Tampa-St. Petersburg-Clearwater,53.99, FL,79,5
+80,Detroit-Warren-Dearborn,53.92, MI,80,5
+81,Akron,53.47, OH,81,4
+82,Cleveland-Elyria,53.15, OH,82,4
+83,Harrisburg-Carlisle,52.93, PA,83,4
+84,Houston-The Woodlands-Sugar Land,52.85, TX,84,4
+85,Greenville-Anderson,52.79, SC,85,4
+86,Oklahoma City,52.36, OK,86,4
+87,Los Angeles-Long Beach-Anaheim,52.05, CA,87,4
+88,Savannah,51.90, GA,88,4
+89,Ogden-Clearfield,51.85, UT,89,4
+90,Louisville/Jefferson County,51.34, KY-IN,90,4
+91,Knoxville,51.24, TN,91,4
+92,Oxnard-Thousand Oaks-Ventura,51.23, CA,92,4
+93,Jackson,50.96, MS,93,4
+94,Springfield,50.68, MO,94,4
+95,New Orleans-Metairie,50.64, LA,95,4
+96,Peoria,49.89, IL,96,3
+97,Providence-Warwick,49.70, RI-MA,97,3
+98,Pensacola-Ferry Pass-Brent,49.51, FL,98,3
+99,Wichita,49.31, KS,99,3
+100,Allentown-Bethlehem-Easton,49.16, PA-NJ,100,3
+101,Greensboro-High Point,48.90, NC,101,3
+102,Montgomery,48.77, AL,102,3
+103,San Antonio-New Braunfels,48.69, TX,103,3
+104,Toledo,48.62, OH,104,3
+105,Myrtle Beach-Conway-North Myrtle Beach,48.57, SC-NC,105,3
+106,Fayetteville,47.95, NC,106,3
+107,Cape Coral-Fort Myers,47.49, FL,107,3
+108,Memphis,47.20, TN-MS-AR,108,3
+109,Chattanooga,46.91, TN-GA,109,3
+110,Davenport-Moline-Rock Island,46.23, IA-IL,110,3
+111,Tulsa,45.96, OK,111,2
+112,Fort Wayne,45.66, IN,112,2
+113,Winston-Salem,45.56, NC,113,2
+114,Baton Rouge,45.07, LA,114,2
+115,Deltona-Daytona Beach-Ormond Beach,44.92, FL,115,2
+116,Salisbury,43.80, MD-DE,116,2
+117,Augusta-Richmond County,43.78, GA-SC,117,2
+118,Salem,43.63, OR,118,2
+119,Port St. Lucie,43.10, FL,119,2
+120,Killeen-Temple,42.32, TX,120,2
+121,Vallejo,41.79, CA,121,2
+122,Lancaster,41.41, PA,122,2
+123,York-Hanover,40.35, PA,123,2
+124,Canton-Massillon,39.71, OH,124,2
+125,Scranton--Wilkes-Barre,39.40, PA,125,2
+126,Shreveport-Bossier City,39.13, LA,126,2
+127,Flint,39.05, MI,127,2
+128,Las Vegas-Henderson-Paradise,38.65, NV,128,2
+129,Huntington-Ashland,37.51, WV-KY-OH,129,2
+130,Gulfport-Biloxi,37.30, MS,130,2
+131,Mobile,36.67, AL,131,2
+132,Rockford,36.43, IL,132,2
+133,Reading,36.01, PA,133,2
+134,Youngstown-Warren-Boardman,35.30, OH-PA,134,2
+135,Lafayette,35.08, LA,135,2
+136,El Paso,32.80, TX,136,1
+137,Riverside-San Bernardino-Ontario,32.36, CA,137,1
+138,Ocala,32.16, FL,138,1
+139,Lakeland-Winter Haven,32.11, FL,139,1
+140,Fresno,29.24, CA,140,1
+141,Corpus Christi,29.17, TX,141,1
+142,Salinas,28.57, CA,142,1
+143,Beaumont-Port Arthur,27.35, TX,143,1
+144,Hickory-Lenoir-Morganton,26.91, NC,144,1
+145,Stockton,24.51, CA,145,1
+146,Modesto,18.55, CA,146,1
+147,Bakersfield,17.73, CA,147,1
+148,Brownsville-Harlingen,12.29, TX,148,1
+149,McAllen-Edinburg-Mission,10.46, TX,149,1
+150,Visalia,9.44, CA,150,1
