@@ -1,6 +1,6 @@
 import sys
 import os
-from ..Scraper.Crime_cost_scraper import CrimeCostScraper
+from Scraper.Crime_cost_scraper import CrimeCostScraper
 import pandas as pd
 import numpy as np
 

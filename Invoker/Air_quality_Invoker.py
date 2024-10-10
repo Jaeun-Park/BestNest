@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import zipfile
 
-from ..Scraper.Air_quality_scraper import AirQualityScraper
+from Scraper.Air_quality_scraper import AirQualityScraper
 
 class AirQualityInvoker:
     def __init__(self) -> None:
