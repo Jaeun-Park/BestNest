@@ -6,19 +6,8 @@ import streamlit as st
 import os
 from Merge_dataset import MergeData  # Make sure MergeData is working as expected
 
-
-# st.write(f"Current directory: {os.getcwd()}")
-# st.write(f"Files in Data_Files: {os.listdir('Data_Files')}")
-
 # Clear the cache
 st.cache_data.clear()
-# with st.spinner("Processing..."):
-#     try:
-#         MergeData.mergeData()  # Ensure this method is invoked properly
-#         # st.write("Data merged successfully.")  # Add a log
-#     except Exception as e:
-#         st.error(f"Data merging failed: {str(e)}")
-#         st.stop()
 
 # Function to filter and display the DataFrame based on user choices
 def filter_dataframe(df, choices):
@@ -106,7 +95,6 @@ user_choices = st.multiselect(
     options=[1, 2, 3, 4],
     format_func=lambda x: ["Cost of Living", "Literacy Rate", "Crime Cost", "Air Quality"][x-1]
 )
-# st.write(f"User choices: {user_choices}")
 
 if st.button("Analyze"):
     # Step 1: Capture User Input and Save to CSV
@@ -117,8 +105,6 @@ if st.button("Analyze"):
         # Save the DataFrame to a CSV file with column '0' as header and without an index
         user_choices_file_path = 'Data_Files/User_Choices.csv'
         user_choices_df.to_csv(user_choices_file_path, index=False)
-        
-        st.write(f"User choices saved to {user_choices_file_path}")
             
         try:
             MergeData.mergeData()  # Ensure this method is invoked properly
@@ -146,7 +132,6 @@ if st.button("Analyze"):
         except ValueError as e:
             st.error(str(e))
             st.stop()
-        # st.write(final_df.head())
 
         # Generate summary for the top city
         top_city_name, top_city_summary = generate_top_city_summary(final_df)
