@@ -155,7 +155,10 @@ if st.button("Analyze"):
         top_10_table[f'Overall Score (Out of Total {total_sum_score})'] = top_10_table[f'Overall Score (Out of Total {total_sum_score})'].astype(int)
 
         # Hide the index column by resetting the index and passing it to st.dataframe
-        st.dataframe(top_10_table.reset_index(drop=True), hide_index=True)
+        # st.dataframe(top_10_table.reset_index(drop=True), hide_index=True)
+
+        # Debug. st.dataframe() function does not recognize the hide_index parameter, which was introduced in a more recent version of Streamlit.
+        st.dataframe(top_10_table.reset_index(drop=True))
 
         # Display heatmap separately
         st.subheader("Heatmap for your Top 10 Cities")
